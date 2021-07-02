@@ -356,6 +356,12 @@ void inputtester()
 				sprintf(strs, "%4d", sx);
 				write_string(strs, 0xFF, 17, 11 + inputindex);
 			}
+			else
+			{
+				char strs[5];
+				sprintf(strs, "%4d", "0");
+				write_string(strs, 0xFF, 17, 11 + inputindex);
+			}
 			sx_last[inputindex] = sx;
 		}
 
