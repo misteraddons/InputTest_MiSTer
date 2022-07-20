@@ -298,18 +298,18 @@ int main(int argc, char** argv, char** env) {
 		//top->joystick_4 = top->joystick_0;
 		//top->joystick_5 = top->joystick_0;
 		
-		top->joystick_analog_0 += 1;
-		top->joystick_analog_0 -= 256;
-		//top->joystick_analog_1 -= 1;
-		//top->joystick_analog_1 += 256;
-		//top->joystick_analog_2 += 1;
-		//top->joystick_analog_2 -= 256;
-		//top->joystick_analog_3 -= 1;
-		//top->joystick_analog_3 += 256;
-		//top->joystick_analog_4 += 1;
-		//top->joystick_analog_4 -= 256;
-		//top->joystick_analog_5 -= 1;
-		//top->joystick_analog_5 += 256;
+		top->joystick_l_analog_0 += 1;
+		top->joystick_l_analog_0 -= 256;
+		//top->joystick_l_analog_1 -= 1;
+		//top->joystick_l_analog_1 += 256;
+		//top->joystick_l_analog_2 += 1;
+		//top->joystick_l_analog_2 -= 256;
+		//top->joystick_l_analog_3 -= 1;
+		//top->joystick_l_analog_3 += 256;
+		//top->joystick_l_analog_4 += 1;
+		//top->joystick_l_analog_4 -= 256;
+		//top->joystick_l_analog_5 -= 1;
+		//top->joystick_l_analog_5 += 256;
 
 		top->paddle_0 += 1;
 		//top->paddle_1 -= 1;

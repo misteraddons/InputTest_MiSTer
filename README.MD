@@ -20,7 +20,7 @@ A simple bespoke (i.e. I made it up with no real plan) 8-bit system with a 40x30
  - 7 Memory-mapped IO regions (all read-only).  _Yes I know about MREQ but SFRs turned out to be annoying in sdcc so :)_
    - Hardware state (H/V Sync, H/V Blank etc) (8 bytes)
    - joystick_5->0 from HPS (192 bytes)
-   - joystick_analog_5->0 from HPS (96 bytes)
+   - joystick_l_analog_5->0 from HPS (96 bytes)
    - paddle_5->0 from HPS (48 bytes)
    - spinner_5->0 from HPS (96 bytes)
    - ps2_key from HPS (11 bytes)
