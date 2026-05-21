@@ -476,7 +476,7 @@ always@(posedge clk_sys) begin : uio_block
 						end
 
 				// joystick analog triggers, L2 byte then R2 byte
-				'h44: if(!byte_cnt[MAX_W:2]) begin
+				'h45: if(!byte_cnt[MAX_W:2]) begin
 							case(byte_cnt[1:0])
 								1: atrig_idx <= io_din[3:0];
 								2: case(atrig_idx)
