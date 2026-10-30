@@ -290,7 +290,8 @@ always@(posedge clk_sys) begin : uio_block
 	reg [15:0] tmp1;
 	reg  [7:0] tmp2;
 	reg  [3:0] sdn_r;
-	reg  [3:0] atrig_idx;
+	reg  [7:0] atrig_idx;
+	reg  [7:0] atrig_l2;
 
 	old_status_set <= status_set;
 	if(~old_status_set & status_set) begin
@@ -475,28 +476,19 @@ always@(posedge clk_sys) begin : uio_block
 							endcase
 						end
 
-				// joystick analog triggers, L2 byte then R2 byte
-				'h45: if(!byte_cnt[MAX_W:2]) begin
-							case(byte_cnt[1:0])
-								1: atrig_idx <= io_din[3:0];
-								2: case(atrig_idx)
-										 0: joystick_l2_analog_0 <= io_din[7:0];
-										 1: joystick_l2_analog_1 <= io_din[7:0];
-										 2: joystick_l2_analog_2 <= io_din[7:0];
-										 3: joystick_l2_analog_3 <= io_din[7:0];
-										 4: joystick_l2_analog_4 <= io_din[7:0];
-										 5: joystick_l2_analog_5 <= io_din[7:0];
-									endcase
-								3: case(atrig_idx)
-										 0: joystick_r2_analog_0 <= io_din[7:0];
-										 1: joystick_r2_analog_1 <= io_din[7:0];
-										 2: joystick_r2_analog_2 <= io_din[7:0];
-										 3: joystick_r2_analog_3 <= io_din[7:0];
-										 4: joystick_r2_analog_4 <= io_din[7:0];
-										 5: joystick_r2_analog_5 <= io_din[7:0];
-									endcase
-							endcase
-						end
+				// 0x46: player, L2, R2. Commit both triggers only after R2 arrives.
+				'h46: case(byte_cnt)
+							1: atrig_idx <= io_din[7:0];
+							2: atrig_l2 <= io_din[7:0];
+							3: case(atrig_idx)
+									0: {joystick_r2_analog_0, joystick_l2_analog_0} <= {io_din[7:0], atrig_l2};
+									1: {joystick_r2_analog_1, joystick_l2_analog_1} <= {io_din[7:0], atrig_l2};
+									2: {joystick_r2_analog_2, joystick_l2_analog_2} <= {io_din[7:0], atrig_l2};
+									3: {joystick_r2_analog_3, joystick_l2_analog_3} <= {io_din[7:0], atrig_l2};
+									4: {joystick_r2_analog_4, joystick_l2_analog_4} <= {io_din[7:0], atrig_l2};
+									5: {joystick_r2_analog_5, joystick_l2_analog_5} <= {io_din[7:0], atrig_l2};
+								endcase
+						endcase
 
 				// notify image selection
 				'h1c: begin

@@ -16,6 +16,22 @@ To access the menu:
 
 There are two secrets to find...
 
+## Analog triggers
+
+This fork accepts independent L2/R2 values through proposed UIO command `0x46`,
+paired with the Main_MiSTer joymap_v4 sender. The packet is four zero-extended
+byte-valued words: command, player (0–5), L2 (0–255), R2 (0–255). Both triggers
+update together after the complete packet; invalid players and incomplete packets
+do not alter the displayed values. `0x45` is not a trigger command: it is reserved
+upstream for force feedback. The command allocation still needs upstream agreement.
+
+Receiver regression coverage is shared with the Template_MiSTer analog-trigger
+branch. From that checkout, with Python 3 and Verilator 5:
+
+```
+python3 tools/test_analog_triggers.py --hps-io PATH/TO/InputTest_MiSTer/sys/hps_io.sv --output NEW_OUTPUT_DIRECTORY
+```
+
 ## Acknowledgements
 
 Created by JimmyStones (http://github.com/jimmystones), with thanks to:
